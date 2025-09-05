@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeVision - البحث</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-slate-900/80 backdrop-blur-sm border-l border-slate-800 p-4 md:p-6 fixed md:relative bottom-0 md:bottom-auto z-40 md:z-auto md:flex flex-col flex-shrink-0" id="sidebar">
+        <a href="index.html" id="logo-link" class="flex items-center gap-2 text-2xl font-bold text-white mb-8 hidden md:flex">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-sky-400"><path d="M4.5 4.5a3 3 0 00-3 3v9a3 3 0 003 3h9a3 3 0 003-3v-1.1l5.555 3.056A1.5 1.5 0 0024 18.382V5.618a1.5 1.5 0 00-2.445-1.222L16.5 7.45V7.5a3 3 0 00-3-3h-9z"></path></svg>
+            PrimeVision
+        </a>
+        <nav class="flex md:flex-col justify-around md:justify-start md:gap-2">
+            <a href="index.html" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="home" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base">الرئيسية</span>
+            </a>
+            <a href="search.html?type=movie" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="film" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base">أفلام</span>
+            </a>
+            <a href="search.html?type=tv" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="tv" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base">مسلسلات</span>
+            </a>
+            <a href="favorites.html" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="heart" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base">المفضلة</span>
+            </a>
+            <a href="favorites.html?tab=watchlist" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="list-video" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base">قائمة المشاهدة</span>
+            </a>
+        </nav>
+        <div class="mt-auto hidden md:block">
+            <button id="theme-toggle" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i id="theme-icon" data-lucide="sun" class="w-5 h-5 text-slate-400"></i><span id="theme-text">الوضع الفاتح</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 pb-20 md:pb-0 overflow-y-auto">
+        <!-- Header -->
+        <header class="nav-header sticky top-0 z-30 p-4 flex items-center justify-between gap-4">
+             <div class="flex items-center gap-4">
+                <button id="user-btn" class="flex items-center gap-2" onclick="window.location.href='profile.html'">
+                    <img src="./images/default-avatar.jpg" alt="User" class="w-8 h-8 rounded-full user-avatar">
+                    <span class="username-display hidden md:inline">زائر</span>
+                </button>
+                 <button id="notification-btn" class="relative p-2 rounded-full hover:bg-slate-700">
+                    <i data-lucide="bell" class="w-5 h-5 text-slate-400"></i>
+                 </button>
+            </div>
+            <div class="flex-1 max-w-xl flex items-center gap-2">
+                <form id="search-form" class="relative flex-1">
+                    <input type="text" id="search-input" name="query" placeholder="ابحث عن أفلام، مسلسلات..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pr-10 pl-4 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <i data-lucide="search" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                </form>
+                <button id="filter-btn" class="p-2 bg-slate-800 border border-slate-700 rounded-full hover:bg-slate-700">
+                    <i data-lucide="sliders-horizontal" class="w-5 h-5 text-slate-400"></i>
+                </button>
+            </div>
+            <a href="index.html" id="mobile-logo-link" class="flex md:hidden items-center gap-2 text-xl font-bold text-white">
+                PrimeVision
+            </a>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div id="content-area" class="p-4 md:p-6 lg:p-8"></div>
+    </main>
+    
+    <!-- Details Modal -->
+    <div id="details-modal" class="modal-backdrop fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+        <div class="bg-slate-900 w-full max-w-5xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col">
+            <div id="details-content" class="overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/search.js"></script>
+    <script src="./js/favorites.js"></script>
+</body>
+</html>

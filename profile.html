@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="profile_title">PrimeVision - الملف الشخصي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Language Toggle -->
+    <button id="language-toggle" class="language-toggle">
+        <span id="language-text">EN</span>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-slate-900/80 backdrop-blur-sm border-l border-slate-800 p-4 md:p-6 fixed md:relative bottom-0 md:bottom-auto z-40 md:z-auto md:flex flex-col flex-shrink-0" id="sidebar">
+        <a href="index.html" id="logo-link" class="flex items-center gap-2 text-2xl font-bold text-white mb-8 hidden md:flex">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-sky-400"><path d="M4.5 4.5a3 3 0 00-3 3v9a3 3 0 003 3h9a3 3 0 003-3v-1.1l5.555 3.056A1.5 1.5 0 0024 18.382V5.618a1.5 1.5 0 00-2.445-1.222L16.5 7.45V7.5a3 3 0 00-3-3h-9z"></path></svg>
+            PrimeVision
+        </a>
+        <nav class="flex md:flex-col justify-around md:justify-start md:gap-2">
+            <a href="index.html" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="home" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="home">الرئيسية</span>
+            </a>
+            <a href="search.html?type=movie" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="film" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="movies">أفلام</span>
+            </a>
+            <a href="search.html?type=tv" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="tv" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="tv_shows">مسلسلات</span>
+            </a>
+            <a href="favorites.html" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="heart" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="favorites">المفضلة</span>
+            </a>
+            <a href="favorites.html?tab=watchlist" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="list-video" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="watchlist">قائمة المشاهدة</span>
+            </a>
+        </nav>
+        <div class="mt-auto hidden md:block">
+            <div class="user-menu">
+                <button id="user-menu-button" class="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                    <div class="w-8 h-8 bg-gradient-to-br from-sky-400 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold text-white" id="user-avatar">
+                        U
+                    </div>
+                    <div class="flex-1 text-right">
+                        <div class="text-sm font-medium text-white" id="user-display-name" data-translate="guest">ضيف</div>
+                        <div class="text-xs text-slate-400" id="user-email">guest@example.com</div>
+                    </div>
+                    <i data-lucide="chevron-up" class="w-4 h-4 text-slate-400"></i>
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="profile.html" class="user-menu-item active">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        <span data-translate="profile">الملف الشخصي</span>
+                    </a>
+                    <a href="favorites.html" class="user-menu-item">
+                        <i data-lucide="heart" class="w-4 h-4"></i>
+                        <span data-translate="favorites">المفضلة</span>
+                    </a>
+                    <a href="favorites.html?tab=watchlist" class="user-menu-item">
+                        <i data-lucide="list-video" class="w-4 h-4"></i>
+                        <span data-translate="watchlist">قائمة المشاهدة</span>
+                    </a>
+                    <div class="user-menu-divider"></div>
+                    <button id="logout-button" class="user-menu-item w-full text-right">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        <span data-translate="logout">تسجيل الخروج</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="flex-1 bg-slate-950 p-4 md:p-6 mb-16 md:mb-0">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-white" data-translate="profile">الملف الشخصي</h1>
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Profile Content -->
+        <div class="max-w-4xl mx-auto space-y-8">
+            <!-- Profile Header -->
+            <div class="card">
+                <div class="flex items-center gap-6">
+                    <div class="profile-avatar" id="profile-avatar">
+                        U
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-2xl font-bold text-white mb-2" id="profile-name" data-translate="guest">ضيف</h2>
+                        <p class="text-slate-400 mb-4" id="profile-email">guest@example.com</p>
+                        <div class="flex gap-3">
+                            <button class="btn-primary" id="edit-profile-btn" data-translate="edit_profile">تعديل الملف الشخصي</button>
+                            <button class="btn-secondary" id="change-password-btn" data-translate="change_password">تغيير كلمة المرور</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="card">
+                <h3 class="card-title mb-6" data-translate="statistics">الإحصائيات</h3>
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="favorites-count">0</div>
+                        <div class="profile-stat-label" data-translate="favorites">المفضلة</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="watchlist-count">0</div>
+                        <div class="profile-stat-label" data-translate="watchlist">قائمة المشاهدة</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="reviews-count">0</div>
+                        <div class="profile-stat-label" data-translate="reviews">المراجعات</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+                <h3 class="card-title mb-6" data-translate="recent_activity">النشاط الأخير</h3>
+                <div id="recent-activity" class="space-y-4">
+                    <!-- Activity items will be loaded here -->
+                    <div class="text-center text-slate-400 py-8" data-translate="no_recent_activity">لا يوجد نشاط حديث</div>
+                </div>
+            </div>
+
+            <!-- Account Settings -->
+            <div class="card">
+                <h3 class="card-title mb-6" data-translate="account_settings">إعدادات الحساب</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
+                        <div>
+                            <h4 class="font-medium text-white" data-translate="email_notifications">إشعارات البريد الإلكتروني</h4>
+                            <p class="text-sm text-slate-400" data-translate="email_notifications_desc">احصل على إشعارات حول المحتوى الجديد</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" id="email-notifications">
+                            <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-sky-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
+                        <div>
+                            <h4 class="font-medium text-white" data-translate="auto_play">التشغيل التلقائي</h4>
+                            <p class="text-sm text-slate-400" data-translate="auto_play_desc">تشغيل المقاطع التريلر تلقائياً</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" id="auto-play" checked>
+                            <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-sky-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-600"></div>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
+                        <div>
+                            <h4 class="font-medium text-white" data-translate="data_export">تصدير البيانات</h4>
+                            <p class="text-sm text-slate-400" data-translate="data_export_desc">تحميل نسخة من بياناتك</p>
+                        </div>
+                        <button class="btn-outline" id="export-data-btn" data-translate="export">تصدير</button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-red-900/20 border border-red-800 rounded-lg">
+                        <div>
+                            <h4 class="font-medium text-red-400" data-translate="delete_account">حذف الحساب</h4>
+                            <p class="text-sm text-red-400/70" data-translate="delete_account_desc">حذف حسابك وجميع بياناتك نهائياً</p>
+                        </div>
+                        <button class="btn-danger" id="delete-account-btn" data-translate="delete">حذف</button>
+                    </div>
+                </div>
+            </div>
+    <!-- Scripts -->
+    <script src="./js/language.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+
+    <script>
+        // Profile page functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Initialize language manager
+            if (typeof LanguageManager !== 'undefined') {
+                window.languageManager = new LanguageManager();
+                window.languageManager.init();
+            }
+
+            // Check authentication
+            checkAuthentication();
+
+            // Load profile data
+            loadProfileData();
+
+            // Setup event listeners
+            setupEventListeners();
+        });
+
+        function checkAuthentication() {
+            const userData = getUserData();
+            if (!userData || !userData.user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        function loadProfileData() {
+            const userData = getUserData();
+            if (!userData || !userData.user) return;
+
+            const user = userData.user;
+
+            // Update profile display
+            document.getElementById('profile-name').textContent = user.displayName || user.username || 'مستخدم';
+            document.getElementById('profile-email').textContent = user.email || 'guest@example.com';
+            
+            // Update avatar
+            const avatar = document.getElementById('profile-avatar');
+            if (user.avatar) {
+                avatar.innerHTML = `<img src="${user.avatar}" alt="Profile" class="w-full h-full rounded-full object-cover">`;
+            } else {
+                const initials = (user.displayName || user.username || 'U').charAt(0).toUpperCase();
+                avatar.textContent = initials;
+            }
+
+            // Load statistics
+            loadUserStats();
+        }
+
+        function loadUserStats() {
+            const favorites = JSON.parse(localStorage.getItem('primevision_favorites') || '[]');
+            const watchlist = JSON.parse(localStorage.getItem('primevision_watchlist') || '[]');
+            const reviews = JSON.parse(localStorage.getItem('primevision_reviews') || '[]');
+
+            document.getElementById('favorites-count').textContent = favorites.length;
+            document.getElementById('watchlist-count').textContent = watchlist.length;
+            document.getElementById('reviews-count').textContent = reviews.length;
+        }
+
+        function setupEventListeners() {
+            // Edit profile button
+            document.getElementById('edit-profile-btn')?.addEventListener('click', () => {
+                // Implement edit profile functionality
+                alert('تحت التطوير');
+            });
+
+            // Change password button
+            document.getElementById('change-password-btn')?.addEventListener('click', () => {
+                // Implement change password functionality
+                alert('تحت التطوير');
+            });
+
+            // Export data button
+            document.getElementById('export-data-btn')?.addEventListener('click', exportUserData);
+
+            // Delete account button
+            document.getElementById('delete-account-btn')?.addEventListener('click', () => {
+                if (confirm('هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                    deleteAccount();
+                }
+            });
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('translate-x-0');
+                sidebar.classList.toggle('translate-x-full');
+            });
+        }
+
+        function exportUserData() {
+            const userData = {
+                user: JSON.parse(localStorage.getItem('primevision_user') || '{}'),
+                favorites: JSON.parse(localStorage.getItem('primevision_favorites') || '[]'),
+                watchlist: JSON.parse(localStorage.getItem('primevision_watchlist') || '[]'),
+                reviews: JSON.parse(localStorage.getItem('primevision_reviews') || '[]'),
+                searchHistory: JSON.parse(localStorage.getItem('primevision_search_history') || '[]')
+            };
+
+            const blob = new Blob([JSON.stringify(userData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'primevision-data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function deleteAccount() {
+            // Clear all user data
+            localStorage.removeItem('primevision_user');
+            localStorage.removeItem('primevision_favorites');
+            localStorage.removeItem('primevision_watchlist');
+            localStorage.removeItem('primevision_reviews');
+            localStorage.removeItem('primevision_search_history');
+            
+            alert('تم حذف حسابك بنجاح');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `primevision-data-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Helper functions
+        function getAllActivities() {
+            const favorites = JSON.parse(localStorage.getItem('primevision_favorites') || '[]');
+            const watchlist = JSON.parse(localStorage.getItem('primevision_watchlist') || '[]');
+            const reviews = JSON.parse(localStorage.getItem('primevision_reviews') || '[]');
+
+            return [
+                ...favorites.map(item => ({ ...item, type: 'favorite', action: 'أضيف إلى المفضلة' })),
+                ...watchlist.map(item => ({ ...item, type: 'watchlist', action: 'أضيف إلى قائمة المشاهدة' })),
+                ...reviews.map(item => ({ ...item, type: 'review', action: 'كتب مراجعة' }))
+            ].sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+        }
+
+        function getActivityIcon(type) {
+            switch (type) {
+                case 'favorite': return 'heart';
+                case 'watchlist': return 'bookmark';
+                case 'review': return 'star';
+                default: return 'activity';
+            }
+        }
+
+        function getActivityBgColor(type) {
+            switch (type) {
+                case 'favorite': return 'bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-400';
+                case 'watchlist': return 'bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400';
+                case 'review': return 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400';
+                default: return 'bg-gray-100 text-gray-600 dark:bg-gray-900/20 dark:text-gray-400';
+            }
+        }
+
+        // Form handlers
+        document.getElementById('profile-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const userData = JSON.parse(localStorage.getItem('primevision_user'));
+            const formData = new FormData(e.target);
+            
+            userData.user.username = formData.get('username');
+            userData.user.displayName = formData.get('displayName');
+            userData.user.email = formData.get('email');
+            userData.user.bio = formData.get('bio');
+            
+            localStorage.setItem('primevision_user', JSON.stringify(userData));
+            
+            // Update UI
+            loadProfileData();
+            
+            alert('تم حفظ التغييرات بنجاح');
+        });
+
+        document.getElementById('change-password-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const currentPassword = formData.get('currentPassword');
+            const newPassword = formData.get('newPassword');
+            const confirmNewPassword = formData.get('confirmNewPassword');
+            
+            if (newPassword !== confirmNewPassword) {
+                alert('كلمة المرور الجديدة وتأكيدها غير متطابقين');
+                return;
+            }
+            
+            // In a real app, you would verify the current password
+            // For this demo, we'll just simulate success
+            alert('تم تحديث كلمة المرور بنجاح');
+            hideChangePasswordModal();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+/* PrimeVision Custom Styles */
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --secondary: #64748b;
+    --background: #0f172a;
+    --surface: #1e293b;
+    --card: #334155;
+    --border: #475569;
+    --text: #f8fafc;
+    --text-muted: #cbd5e1;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+}
+
+/* Font Configuration */
+html[lang="ar"] {
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html[lang="en"] {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dark theme base */
+.dark {
+    background: var(--background);
+    color: var(--text);
+}
+
+/* RTL/LTR Support */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="ltr"] {
+    text-align: left;
+}
+
+/* Language Toggle Button */
+.language-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 50;
+    background-color: rgb(30 41 59);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(71 85 105);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.language-toggle:hover {
+    background-color: rgb(51 65 85);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* User Menu Dropdown */
+.user-menu {
+    position: relative;
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    margin-top: 0.5rem;
+    width: 14rem;
+    background-color: rgb(30 41 59);
+    border-radius: 0.5rem;
+    border: 1px solid rgb(71 85 105);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s;
+    right: 0;
+}
+
+[dir="ltr"] .user-menu-dropdown {
+    left: 0;
+    right: auto;
+}
+
+.user-menu-dropdown.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.user-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: rgb(203 213 225);
+    transition: colors 0.15s;
+    cursor: pointer;
+}
+
+.user-menu-item:hover {
+    color: white;
+    background-color: rgb(51 65 85);
+}
+
+.user-menu-item:first-child {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.user-menu-item:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.user-menu-divider {
+    border-top: 1px solid rgb(71 85 105);
+    margin: 0.25rem 0;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: rgb(14 165 233);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary:hover {
+    background-color: rgb(2 132 199);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.btn-secondary {
+    background-color: rgb(51 65 85);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: rgb(71 85 105);
+}
+
+.btn-outline {
+    border: 1px solid rgb(71 85 105);
+    color: rgb(203 213 225);
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-outline:hover {
+    border-color: rgb(100 116 139);
+    color: white;
+}
+
+.btn-danger {
+    background-color: rgb(220 38 38);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-danger:hover {
+    background-color: rgb(185 28 28);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(203 213 225);
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background-color: rgb(30 41 59);
+    border: 1px solid rgb(71 85 105);
+    border-radius: 0.5rem;
+    color: white;
+    transition: all 0.2s;
+}
+
+.form-input::placeholder {
+    color: rgb(148 163 184);
+}
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(14 165 233);
+    border-color: transparent;
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background-color: rgb(30 41 59);
+    border: 1px solid rgb(71 85 105);
+    border-radius: 0.5rem;
+    color: white;
+    transition: all 0.2s;
+}
+
+.form-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(14 165 233);
+    border-color: transparent;
+}
+
+/* Card Components */
+.card {
+    background-color: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(51 65 85);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.card-header {
+    border-bottom: 1px solid rgb(51 65 85);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* Navigation Active State */
+.sidebar-link.active {
+    background-color: rgb(51 65 85);
+    color: white;
+}
+
+.sidebar-link.active i {
+    color: rgb(56 189 248);
+}
+
+/* Movie/TV Card Hover Effects */
+.movie-card {
+    transition: all 0.3s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading States */
+.loading-skeleton {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background-color: rgb(51 65 85);
+    border-radius: 0.25rem;
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 50;
+    max-width: 24rem;
+    background-color: rgb(30 41 59);
+    border: 1px solid rgb(71 85 105);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.notification.success {
+    border-color: rgb(34 197 94);
+}
+
+.notification.error {
+    border-color: rgb(239 68 68);
+}
+
+.notification.warning {
+    border-color: rgb(245 158 11);
+}
+
+/* Modal Styles */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-content {
+    background-color: rgb(30 41 59);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    max-width: 28rem;
+    width: 100%;
+    border: 1px solid rgb(71 85 105);
+}
+
+/* Rating Stars */
+.rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.rating-star {
+    width: 1rem;
+    height: 1rem;
+    color: rgb(251 191 36);
+}
+
+/* Profile Specific Styles */
+.profile-avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgb(56 189 248), rgb(37 99 235));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.profile-stat {
+    background-color: rgba(30, 41, 59, 0.5);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.profile-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(56 189 248);
+}
+
+.profile-stat-label {
+    font-size: 0.875rem;
+    color: rgb(148 163 184);
+    margin-top: 0.25rem;
+}
+
+/* Tab System */
+.tab-button {
+    background-color: transparent;
+    color: rgb(148 163 184);
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tab-button:hover {
+    color: white;
+}
+
+.tab-button.active {
+    background-color: rgb(14 165 233);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .user-menu-dropdown {
+        width: 12rem;
+    }
+    
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

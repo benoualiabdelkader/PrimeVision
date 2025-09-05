@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="favorites_title">PrimeVision - المفضلة وقائمة المشاهدة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Language Toggle -->
+    <button id="language-toggle" class="language-toggle">
+        <span id="language-text">EN</span>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-slate-900/80 backdrop-blur-sm border-l border-slate-800 p-4 md:p-6 fixed md:relative bottom-0 md:bottom-auto z-40 md:z-auto md:flex flex-col flex-shrink-0" id="sidebar">
+        <a href="index.html" id="logo-link" class="flex items-center gap-2 text-2xl font-bold text-white mb-8 hidden md:flex">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-sky-400"><path d="M4.5 4.5a3 3 0 00-3 3v9a3 3 0 003 3h9a3 3 0 003-3v-1.1l5.555 3.056A1.5 1.5 0 0024 18.382V5.618a1.5 1.5 0 00-2.445-1.222L16.5 7.45V7.5a3 3 0 00-3-3h-9z"></path></svg>
+            PrimeVision
+        </a>
+        <nav class="flex md:flex-col justify-around md:justify-start md:gap-2">
+            <a href="index.html" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="home" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="home">الرئيسية</span>
+            </a>
+            <a href="search.html?type=movie" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="film" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="movies">أفلام</span>
+            </a>
+            <a href="search.html?type=tv" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="tv" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="tv_shows">مسلسلات</span>
+            </a>
+            <a href="favorites.html" class="sidebar-link active flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="heart" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="favorites">المفضلة</span>
+            </a>
+            <a href="favorites.html?tab=watchlist" class="sidebar-link flex flex-col md:flex-row items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <i data-lucide="list-video" class="w-5 h-5 text-slate-400"></i><span class="text-sm md:text-base" data-translate="watchlist">قائمة المشاهدة</span>
+            </a>
+        </nav>
+        <div class="mt-auto hidden md:block">
+            <div class="user-menu">
+                <button id="user-menu-button" class="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                    <div class="w-8 h-8 bg-gradient-to-br from-sky-400 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold text-white" id="user-avatar">
+                        U
+                    </div>
+                    <div class="flex-1 text-right">
+                        <div class="text-sm font-medium text-white" id="user-display-name" data-translate="guest">ضيف</div>
+                        <div class="text-xs text-slate-400" id="user-email">guest@example.com</div>
+                    </div>
+                    <i data-lucide="chevron-up" class="w-4 h-4 text-slate-400"></i>
+                </button>
+                <div id="user-menu-dropdown" class="user-menu-dropdown">
+                    <a href="profile.html" class="user-menu-item">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        <span data-translate="profile">الملف الشخصي</span>
+                    </a>
+                    <a href="favorites.html" class="user-menu-item active">
+                        <i data-lucide="heart" class="w-4 h-4"></i>
+                        <span data-translate="favorites">المفضلة</span>
+                    </a>
+                    <a href="favorites.html?tab=watchlist" class="user-menu-item">
+                        <i data-lucide="list-video" class="w-4 h-4"></i>
+                        <span data-translate="watchlist">قائمة المشاهدة</span>
+                    </a>
+                    <div class="user-menu-divider"></div>
+                    <button id="logout-button" class="user-menu-item w-full text-right">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        <span data-translate="logout">تسجيل الخروج</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 bg-slate-950 p-4 md:p-6 mb-16 md:mb-0">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-white" data-translate="favorites_and_watchlist">المفضلة وقائمة المشاهدة</h1>
+                    <p class="text-slate-400 mt-1" data-translate="manage_favorites">إدارة قوائمك المفضلة</p>
+                </div>
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Tabs -->
+        <div class="flex gap-1 bg-slate-800/50 p-1 rounded-lg mb-8 max-w-md">
+            <button id="favorites-tab-btn" class="tab-button active flex-1 px-4 py-2 rounded-md text-sm font-medium transition-colors" data-tab="favorites">
+                <i data-lucide="heart" class="w-4 h-4 mr-2"></i>
+                <span data-translate="favorites">المفضلة</span>
+            </button>
+            <button id="watchlist-tab-btn" class="tab-button flex-1 px-4 py-2 rounded-md text-sm font-medium transition-colors" data-tab="watchlist">
+                <i data-lucide="bookmark" class="w-4 h-4 mr-2"></i>
+                <span data-translate="watchlist">قائمة المشاهدة</span>
+            </button>
+        </div>
+
+        <!-- Content Container -->
+        <div class="space-y-6">
+            <!-- Favorites Content -->
+            <div id="favorites-content" class="tab-content">
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <select id="favorites-filter" class="form-select">
+                        <option value="all" data-translate="all_types">جميع الأنواع</option>
+                        <option value="movie" data-translate="movies">أفلام</option>
+                        <option value="tv" data-translate="tv_shows">مسلسلات</option>
+                    </select>
+                    
+                    <select id="favorites-sort" class="form-select">
+                        <option value="date_desc" data-translate="newest_first">الأحدث أولاً</option>
+                        <option value="date_asc" data-translate="oldest_first">الأقدم أولاً</option>
+                        <option value="title_asc" data-translate="title_a_z">العنوان (أ-ي)</option>
+                        <option value="rating_desc" data-translate="highest_rated">أعلى تقييم</option>
+                    </select>
+                    
+                    <button id="clear-favorites-btn" class="btn-outline">
+                        <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i>
+                        <span data-translate="clear_all">مسح الكل</span>
+                    </button>
+                </div>
+
+                <!-- Favorites Grid -->
+                <div id="favorites-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="favorites-empty" class="text-center py-16 hidden">
+                    <i data-lucide="heart" class="w-16 h-16 text-slate-600 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2" data-translate="no_favorites">لا توجد مفضلة</h3>
+                    <p class="text-slate-400 mb-6" data-translate="add_favorites_desc">ابدأ بإضافة أفلام ومسلسلات إلى قائمة المفضلة</p>
+                    <a href="index.html" class="btn-primary">
+                        <i data-lucide="search" class="w-4 h-4 mr-2"></i>
+                        <span data-translate="browse_content">تصفح المحتوى</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Watchlist Content -->
+            <div id="watchlist-content" class="tab-content hidden">
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <select id="watchlist-filter" class="form-select">
+                        <option value="all" data-translate="all_types">جميع الأنواع</option>
+                        <option value="movie" data-translate="movies">أفلام</option>
+                        <option value="tv" data-translate="tv_shows">مسلسلات</option>
+                    </select>
+                    
+                    <select id="watchlist-sort" class="form-select">
+                        <option value="date_desc" data-translate="newest_first">الأحدث أولاً</option>
+                        <option value="date_asc" data-translate="oldest_first">الأقدم أولاً</option>
+                        <option value="title_asc" data-translate="title_a_z">العنوان (أ-ي)</option>
+                        <option value="rating_desc" data-translate="highest_rated">أعلى تقييم</option>
+                    </select>
+                    
+                    <button id="clear-watchlist-btn" class="btn-outline">
+                        <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i>
+                        <span data-translate="clear_all">مسح الكل</span>
+                    </button>
+                </div>
+
+                <!-- Watchlist Grid -->
+                <div id="watchlist-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="watchlist-empty" class="text-center py-16 hidden">
+                    <i data-lucide="bookmark" class="w-16 h-16 text-slate-600 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2" data-translate="no_watchlist">قائمة المشاهدة فارغة</h3>
+                    <p class="text-slate-400 mb-6" data-translate="add_watchlist_desc">أضف أفلام ومسلسلات لمشاهدتها لاحقاً</p>
+                    <a href="index.html" class="btn-primary">
+                        <i data-lucide="search" class="w-4 h-4 mr-2"></i>
+                        <span data-translate="browse_content">تصفح المحتوى</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="./js/language.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+
+    <script>
+        // Favorites page functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Initialize language manager
+            if (typeof LanguageManager !== 'undefined') {
+                window.languageManager = new LanguageManager();
+                window.languageManager.init();
+            }
+
+            // Initialize favorites functionality
+            initializeFavoritesPage();
+        });
+
+        function initializeFavoritesPage() {
+            // Set up tab switching
+            setupTabs();
+            
+            // Load initial content
+            loadFavoritesContent();
+            loadWatchlistContent();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Check URL for initial tab
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+            if (tab === 'watchlist') {
+                switchTab('watchlist');
+            }
+        }
+
+        function setupTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tab = button.dataset.tab;
+                    switchTab(tab);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            // Update button states
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active', 'bg-sky-500', 'text-white');
+                btn.classList.add('text-slate-400', 'hover:text-white');
+            });
+            
+            const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active', 'bg-sky-500', 'text-white');
+                activeButton.classList.remove('text-slate-400', 'hover:text-white');
+            }
+
+            // Update content visibility
+            document.getElementById('favorites-content').classList.toggle('hidden', tabName !== 'favorites');
+            document.getElementById('watchlist-content').classList.toggle('hidden', tabName !== 'watchlist');
+
+            // Update URL
+            const url = new URL(window.location);
+            if (tabName === 'watchlist') {
+                url.searchParams.set('tab', 'watchlist');
+            } else {
+                url.searchParams.delete('tab');
+            }
+            history.replaceState(null, '', url);
+        }
+
+        function setupEventListeners() {
+            // Favorites filters
+            document.getElementById('favorites-filter')?.addEventListener('change', loadFavoritesContent);
+            document.getElementById('favorites-sort')?.addEventListener('change', loadFavoritesContent);
+            document.getElementById('clear-favorites-btn')?.addEventListener('click', clearFavorites);
+
+            // Watchlist filters
+            document.getElementById('watchlist-filter')?.addEventListener('change', loadWatchlistContent);
+            document.getElementById('watchlist-sort')?.addEventListener('change', loadWatchlistContent);
+            document.getElementById('clear-watchlist-btn')?.addEventListener('click', clearWatchlist);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('translate-x-0');
+                sidebar.classList.toggle('translate-x-full');
+            });
+        }
+
+        function loadFavoritesContent() {
+            const favorites = JSON.parse(localStorage.getItem('primevision_favorites') || '[]');
+            const grid = document.getElementById('favorites-grid');
+            const empty = document.getElementById('favorites-empty');
+            
+            // Apply filters
+            const typeFilter = document.getElementById('favorites-filter')?.value || 'all';
+            const sortBy = document.getElementById('favorites-sort')?.value || 'date_desc';
+            
+            let filteredFavorites = favorites;
+            
+            // Filter by type
+            if (typeFilter !== 'all') {
+                filteredFavorites = filteredFavorites.filter(item => item.media_type === typeFilter);
+            }
+            
+            // Sort
+            filteredFavorites.sort((a, b) => {
+                switch (sortBy) {
+                    case 'date_asc':
+                        return new Date(a.addedAt || 0) - new Date(b.addedAt || 0);
+                    case 'title_asc':
+                        return (a.title || a.name || '').localeCompare(b.title || b.name || '');
+                    case 'rating_desc':
+                        return (b.vote_average || 0) - (a.vote_average || 0);
+                    default: // date_desc
+                        return new Date(b.addedAt || 0) - new Date(a.addedAt || 0);
+                }
+            });
+
+            if (filteredFavorites.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                grid.innerHTML = filteredFavorites.map(item => createMediaCard(item, 'favorites')).join('');
+            }
+
+            // Re-initialize icons
+            lucide.createIcons();
+        }
+
+        function loadWatchlistContent() {
+            const watchlist = JSON.parse(localStorage.getItem('primevision_watchlist') || '[]');
+            const grid = document.getElementById('watchlist-grid');
+            const empty = document.getElementById('watchlist-empty');
+            
+            // Apply filters
+            const typeFilter = document.getElementById('watchlist-filter')?.value || 'all';
+            const sortBy = document.getElementById('watchlist-sort')?.value || 'date_desc';
+            
+            let filteredWatchlist = watchlist;
+            
+            // Filter by type
+            if (typeFilter !== 'all') {
+                filteredWatchlist = filteredWatchlist.filter(item => item.media_type === typeFilter);
+            }
+            
+            // Sort
+            filteredWatchlist.sort((a, b) => {
+                switch (sortBy) {
+                    case 'date_asc':
+                        return new Date(a.addedAt || 0) - new Date(b.addedAt || 0);
+                    case 'title_asc':
+                        return (a.title || a.name || '').localeCompare(b.title || b.name || '');
+                    case 'rating_desc':
+                        return (b.vote_average || 0) - (a.vote_average || 0);
+                    default: // date_desc
+                        return new Date(b.addedAt || 0) - new Date(a.addedAt || 0);
+                }
+            });
+
+            if (filteredWatchlist.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                grid.innerHTML = filteredWatchlist.map(item => createMediaCard(item, 'watchlist')).join('');
+            }
+
+            // Re-initialize icons
+            lucide.createIcons();
+        }
+
+        function createMediaCard(item, listType) {
+            const title = item.title || item.name || 'Unknown';
+            const poster = item.poster_path 
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : 'https://via.placeholder.com/500x750?text=No+Image';
+            const rating = item.vote_average || 0;
+            const year = item.release_date || item.first_air_date 
+                ? new Date(item.release_date || item.first_air_date).getFullYear()
+                : '';
+
+            return `
+                <div class="movie-card relative group bg-slate-800/50 rounded-lg overflow-hidden border border-slate-700 hover:border-slate-600 transition-all duration-300">
+                    <div class="aspect-[2/3] relative">
+                        <img src="${poster}" alt="${title}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                        
+                        <!-- Remove button -->
+                        <button 
+                            onclick="removeFromList('${item.id}', '${listType}')"
+                            class="absolute top-2 right-2 w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            title="Remove from ${listType}">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+
+                        <!-- Rating -->
+                        ${rating > 0 ? `
+                            <div class="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
+                                <i data-lucide="star" class="w-3 h-3 text-yellow-400"></i>
+                                ${rating.toFixed(1)}
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="p-3">
+                        <h3 class="font-medium text-white text-sm line-clamp-2 mb-1">${title}</h3>
+                        ${year ? `<p class="text-xs text-slate-400">${year}</p>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function removeFromList(itemId, listType) {
+            const storageKey = `primevision_${listType}`;
+            const items = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            const updatedItems = items.filter(item => item.id.toString() !== itemId.toString());
+            
+            localStorage.setItem(storageKey, JSON.stringify(updatedItems));
+            
+            // Reload the appropriate content
+            if (listType === 'favorites') {
+                loadFavoritesContent();
+            } else {
+                loadWatchlistContent();
+            }
+            
+            // Show notification
+            showNotification(`تم الحذف من ${listType === 'favorites' ? 'المفضلة' : 'قائمة المشاهدة'}`, 'success');
+        }
+
+        function clearFavorites() {
+            if (confirm('هل أنت متأكد من حذف جميع المفضلة؟')) {
+                localStorage.removeItem('primevision_favorites');
+                loadFavoritesContent();
+                showNotification('تم مسح جميع المفضلة', 'success');
+            }
+        }
+
+        function clearWatchlist() {
+            if (confirm('هل أنت متأكد من حذف جميع عناصر قائمة المشاهدة؟')) {
+                localStorage.removeItem('primevision_watchlist');
+                loadWatchlistContent();
+                showNotification('تم مسح جميع عناصر قائمة المشاهدة', 'success');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type} fixed top-4 right-4 z-50 max-w-sm bg-slate-800 border rounded-lg p-4 shadow-lg transform translate-x-full transition-transform duration-300`;
+            
+            if (type === 'success') notification.classList.add('border-green-500');
+            if (type === 'error') notification.classList.add('border-red-500');
+            if (type === 'warning') notification.classList.add('border-yellow-500');
+            
+            notification.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <i data-lucide="${type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'info'}" class="w-5 h-5"></i>
+                    <span class="text-white">${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-auto">
+                        <i data-lucide="x" class="w-4 h-4 text-slate-400 hover:text-white"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            lucide.createIcons();
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
