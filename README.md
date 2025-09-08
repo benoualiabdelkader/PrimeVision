@@ -1,124 +1,124 @@
-# PrimeVision
+📽️ PrimeVision
 
-PrimeVision is a modern web application for browsing movies and TV shows, powered by The Movie Database (TMDB) API. It offers a rich user experience with features like content search, favorites management, watchlists, and user authentication.
+PrimeVision is a modern web application that allows users to explore movies and TV shows with advanced features such as search, favorites management, watchlists, and multilingual support. It leverages the TMDB API to provide accurate and up-to-date content.
 
-## Features
+✨ Features
 
-- **Extensive Content Library**: Browse a vast collection of movies and TV shows from the TMDB API.
-- **Search Functionality**: Easily find specific titles using the integrated search bar.
-- **Favorites & Watchlist**: Mark your favorite movies/TV shows and manage a personalized watchlist.
-- **User Authentication**: Securely log in and sign up using traditional email/password or Google OAuth.
-- **Responsive Design**: Enjoy a seamless experience across various devices with a mobile-first approach.
-- **Multi-language Support**: The application supports multiple languages (e.g., Arabic and English).
-- **Theme Toggling**: Switch between light and dark themes for a personalized viewing experience.
-- **Detailed Content Pages**: View comprehensive details for each movie or TV show, including overview, cast, trailers, and recommendations.
+🔍 Search for movies and TV shows.
 
-## Technologies Used
+⭐ Add and remove from Favorites.
 
-- **Frontend**: HTML, CSS (Tailwind CSS), JavaScript
-- **API Integration**: The Movie Database (TMDB) API
-- **Icons**: Lucide Icons
-- **Authentication**: Google OAuth
+📺 Create and manage Watchlists.
 
-## Getting Started
+👤 User authentication (including Google OAuth).
 
-To get a local copy up and running, follow these simple steps.
+🌙 Dark/Light mode toggle.
 
-### Prerequisites
+🌐 Multilingual support (Arabic 🇸🇦 / English 🇬🇧).
 
-- A web browser (e.g., Chrome, Firefox)
-- A local web server (e.g., `serve` from npm, Apache, Nginx) to serve the static files.
+🎬 Detailed content pages (overview, cast, trailers, recommendations).
 
-### Installation
+📱 Responsive design for all devices.
 
-1. **Clone the repository (if applicable):**
-   ```bash
-   git clone <repository_url>
-   cd primevision
-   ```
-   *(Note: If you received this project as a direct download, you can skip this step.)*
+🛠️ Tech Stack
 
-2. **Install a local web server (if you don't have one):**
-   If you have Node.js installed, you can use `serve`:
-   ```bash
-   npm install -g serve
-   ```
+Frontend: HTML, CSS (Tailwind CSS), JavaScript
 
-3. **Obtain a TMDB API Key:**
-   - Go to [The Movie Database (TMDB) website](https://www.themoviedb.org/)
-   - Sign up for an account.
-   - Navigate to your account settings and generate a new API key (v3).
-   - Open `js/app.js` and replace `'YOUR_TMDB_API_KEY'` with your actual API key:
-     ```javascript
-     this.API_KEY = 'YOUR_TMDB_API_KEY'; // Replace with your actual TMDB API key
-     ```
+API: TMDB API
 
-4. **(Optional) Configure Google OAuth:**
-   - Go to the [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select an existing one.
-   - Enable the Google People API.
-   - Go to "Credentials" and create OAuth 2.0 Client IDs (Web application type).
-   - Add `http://localhost:3000` (or your server's address) to "Authorized JavaScript origins" and "Authorized redirect URIs".
-   - Open `js/auth.js` and replace `'YOUR_GOOGLE_CLIENT_ID'` with your actual Google Client ID:
-     ```javascript
-     this.googleClientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your actual Google Client ID
-     ```
+Icons: Lucide Icons
 
-### Running the Application
+Authentication: Google OAuth + custom login system
 
-1. **Navigate to the project directory:**
-   ```bash
-   cd c:\Users\New Tech\Desktop\primevision
-   ```
-
-2. **Start the web server:**
-   If you are using `serve`:
-   ```bash
-   serve -s
-   ```
-   This will typically start the server on `http://localhost:3000`.
-
-3. **Open in browser:**
-   Open your web browser and go to the address provided by your web server (e.g., `http://localhost:3000`).
-
-## Project Structure
-
-```
+📂 Project Structure
 primevision/
 ├── css/
-│   └── style.css         # Custom CSS styles
-├── details.html          # Details page for movies/TV shows
-├── favorites-new.html    # Alternative favorites page
-├── favorites.html        # User's favorite content page
-├── images/               # Image assets
-├── index.html            # Main application entry point
+│   └── style.css
+├── images/
 ├── js/
-│   ├── app.js            # Core application logic, TMDB API integration
-│   ├── auth.js           # User authentication (local & Google OAuth)
-│   ├── favorites.js      # Favorites and watchlist management
-│   ├── language.js       # Language switching functionality
-│   └── search.js         # Search related logic
-├── login.html            # Login/Signup page
-├── profile.html          # User profile page
-└── search.html           # Search results page
-```
+│   ├── app.js        # Core logic + TMDB API integration
+│   ├── auth.js       # Authentication + Google OAuth
+│   ├── favorites.js  # Favorites and watchlist management
+│   ├── language.js   # Language toggle (EN/AR)
+│   └── search.js     # Search functionality
+├── index.html        # Homepage
+├── details.html      # Movie/TV details page
+├── favorites.html    # Favorites page
+├── login.html        # Login page
+├── profile.html      # User profile page
+└── search.html       # Search results page
 
-## Contributing
+🚀 Getting Started
+1. Clone the repository
+git clone https://github.com/benoualiabdelkader/PrimeVision.git
+cd PrimeVision
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+2. Setup TMDB API Key
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Create an account on TMDB
+.
 
-## License
+Generate your API Key (v3).
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Replace it in js/app.js:
 
-## Contact
+this.API_KEY = 'YOUR_TMDB_API_KEY';
 
-Your Name/Project Maintainer - [Your Email/Contact Info]
+3. (Optional) Setup Google OAuth
 
-Project Link: [https://github.com/your_username/PrimeVision](https://github.com/your_username/PrimeVision)
+Go to Google Cloud Console
+.
+
+Create an OAuth Client ID.
+
+Replace 'YOUR_GOOGLE_CLIENT_ID' inside js/auth.js.
+
+4. Run a local server
+
+Using Node.js with serve:
+
+npm install -g serve
+serve -s
+
+5. Open the app
+
+Navigate to:
+
+http://localhost:3000
+
+📸 Screenshots
+
+(Add screenshots of your app here)
+
+📌 Roadmap
+
+Add custom rating system for movies and TV shows.
+
+Support custom notifications for upcoming releases.
+
+Enhance recommendations with AI-powered suggestions.
+
+🤝 Contributing
+
+Contributions are welcome! 🛠️
+
+Fork the repository.
+
+Create a new branch:
+
+git checkout -b feature/my-feature
+
+
+Commit your changes.
+
+Push to the branch:
+
+git push origin feature/my-feature
+
+
+Open a Pull Request.
+
+📜 License
+
+This project is licensed under the MIT License
+.
