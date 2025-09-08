@@ -2,6 +2,17 @@
 
 PrimeVision is a modern web application for browsing movies and TV shows, powered by The Movie Database (TMDB) API. It offers a rich user experience with features like content search, favorites management, watchlists, and user authentication.
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](images/design01.png)
+
+### Details Page
+![Details Page](images/design02.png)
+
+### Profile Page
+![Profile Page](images/design03.png)
+
 ## Features
 
 - **Extensive Content Library**: Browse a vast collection of movies and TV shows from the TMDB API.
