@@ -5,13 +5,13 @@ PrimeVision is a modern web application for browsing movies and TV shows, powere
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](images/design01.png)
+![](images/design01.png)
 
 ### Details Page
-![Details Page](images/design02.png)
+![](images/design02.png)
 
 ### Profile Page
-![Profile Page](images/design03.png)
+![](images/design03.png)
 
 ## Features
 
