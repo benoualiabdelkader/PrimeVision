@@ -127,6 +127,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name/Project Maintainer - [Your Email/Contact Info]
+Your Name/Project Maintainer - [abdelkaderbenouali301@gmail.com]
 
 Project Link: [https://github.com/your_username/PrimeVision](https://github.com/your_username/PrimeVision)
