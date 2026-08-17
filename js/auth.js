@@ -3,7 +3,7 @@
 
 class AuthManager {
     constructor() {
-        this.googleClientId = '1234567890-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com'; // Replace with your actual Google Client ID
+        this.googleClientId = window.PRIMEVISION_CONFIG?.googleClientId || '';
         this.init();
     }
 
@@ -14,8 +14,8 @@ class AuthManager {
     }
 
     initializeGoogleAuth() {
-        // Initialize Google Sign-In
-        if (typeof google !== 'undefined' && google.accounts) {
+        // Initialize Google Sign-In only when configured locally.
+        if (this.googleClientId && typeof google !== 'undefined' && google.accounts) {
             google.accounts.id.initialize({
                 client_id: this.googleClientId,
                 callback: (response) => this.handleGoogleCallback(response),
@@ -246,7 +246,7 @@ class AuthManager {
                 username: user.username,
                 email: user.email,
                 displayName: user.displayName || user.username,
-                avatar: user.avatar || './images/default-avatar.jpg',
+                avatar: user.avatar || './images/default-avatar.svg',
                 provider: 'local'
             });
             
@@ -270,7 +270,7 @@ class AuthManager {
             email: userData.email,
             displayName: userData.username,
             password: userData.password, // In real app, this should be hashed
-            avatar: './images/default-avatar.jpg',
+            avatar: './images/default-avatar.svg',
             provider: 'local',
             createdAt: new Date().toISOString()
         };
@@ -315,7 +315,7 @@ class AuthManager {
 
     // Google OAuth methods
     initiateGoogleLogin() {
-        if (typeof google !== 'undefined' && google.accounts) {
+        if (this.googleClientId && typeof google !== 'undefined' && google.accounts) {
             google.accounts.id.prompt();
         } else {
             // Fallback for demo purposes
@@ -333,7 +333,7 @@ class AuthManager {
                 username: payload.name || payload.email.split('@')[0],
                 displayName: payload.name,
                 email: payload.email,
-                avatar: payload.picture || './images/default-avatar.jpg',
+                avatar: payload.picture || './images/default-avatar.svg',
                 provider: 'google',
                 verified: payload.email_verified
             };
@@ -448,7 +448,7 @@ class AuthManager {
                 email: 'demo@primevision.com',
                 displayName: 'Demo User',
                 password: 'demo123',
-                avatar: './images/default-avatar.jpg',
+                avatar: './images/default-avatar.svg',
                 provider: 'local',
                 createdAt: new Date().toISOString()
             },
@@ -458,7 +458,7 @@ class AuthManager {
                 email: 'admin@primevision.com',
                 displayName: 'Administrator',
                 password: 'admin123',
-                avatar: './images/default-avatar.jpg',
+                avatar: './images/default-avatar.svg',
                 provider: 'local',
                 createdAt: new Date().toISOString()
             }
@@ -479,7 +479,7 @@ class AuthManager {
         // Update avatar
         const avatarImages = document.querySelectorAll('.user-avatar');
         avatarImages.forEach(img => {
-            img.src = userData.avatar || userData.user?.avatar || './images/default-avatar.jpg';
+            img.src = userData.avatar || userData.user?.avatar || './images/default-avatar.svg';
         });
 
         // Show/hide auth-related elements
@@ -502,7 +502,7 @@ class AuthManager {
         // Reset avatar
         const avatarImages = document.querySelectorAll('.user-avatar');
         avatarImages.forEach(img => {
-            img.src = './images/default-avatar.jpg';
+            img.src = './images/default-avatar.svg';
         });
 
         // Show/hide auth-related elements

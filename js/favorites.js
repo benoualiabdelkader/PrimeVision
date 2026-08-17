@@ -216,7 +216,7 @@ class FavoritesManager {
     renderGridItem(item, listType) {
         const posterUrl = item.poster_path ? 
             `https://image.tmdb.org/t/p/w500${item.poster_path}` : 
-            './images/placeholder.jpg';
+            './images/placeholder.svg';
         
         return `
             <div class="content-card group relative">
@@ -250,7 +250,7 @@ class FavoritesManager {
     renderListItem(item, listType) {
         const posterUrl = item.poster_path ? 
             `https://image.tmdb.org/t/p/w500${item.poster_path}` : 
-            './images/placeholder.jpg';
+            './images/placeholder.svg';
         
         return `
             <div class="search-result-item flex items-center gap-4 p-4">

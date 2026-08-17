@@ -1,132 +1,120 @@
 # PrimeVision
 
-PrimeVision is a modern web application for browsing movies and TV shows, powered by The Movie Database (TMDB) API. It offers a rich user experience with features like content search, favorites management, watchlists, and user authentication.
+PrimeVision is a static movie and television discovery interface built around the TMDB API. The application provides search, title details, trailers, recommendations, favorites, watchlists, local profile data, bilingual navigation, and light/dark themes.
 
-## 📸 Screenshots
-
-![](images/design01.png)
-
-![](images/design02.png)
-
-![](images/design03.png)
+The project is a client-side demonstration. It does not provide a production backend, a secure server-side authentication layer, or persistent cloud storage for user data.
 
 ## Features
 
-- **Extensive Content Library**: Browse a vast collection of movies and TV shows from the TMDB API.
-- **Search Functionality**: Easily find specific titles using the integrated search bar.
-- **Favorites & Watchlist**: Mark your favorite movies/TV shows and manage a personalized watchlist.
-- **User Authentication**: Securely log in and sign up using traditional email/password or Google OAuth.
-- **Responsive Design**: Enjoy a seamless experience across various devices with a mobile-first approach.
-- **Multi-language Support**: The application supports multiple languages (e.g., Arabic and English).
-- **Theme Toggling**: Switch between light and dark themes for a personalized viewing experience.
-- **Detailed Content Pages**: View comprehensive details for each movie or TV show, including overview, cast, trailers, and recommendations.
+- Browse movie and television content retrieved from TMDB.
+- Search by title and filter results by media type.
+- View title details, cast, trailers, ratings, recommendations, and reviews.
+- Save favorites and watchlists in the browser.
+- Use the interface in Arabic or English.
+- Switch between light and dark themes.
+- Use optional Google Identity Services integration when a local OAuth client ID is configured.
+- Use a responsive layout based on semantic HTML, custom CSS, Tailwind CDN utilities, and Lucide icons.
 
-## Technologies Used
+## Technology
 
-- **Frontend**: HTML, CSS (Tailwind CSS), JavaScript
-- **API Integration**: The Movie Database (TMDB) API
-- **Icons**: Lucide Icons
-- **Authentication**: Google OAuth
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- TMDB REST API
+- Tailwind CSS CDN
+- Lucide Icons
+- Google Identity Services, optional
+- Browser `localStorage` for demo user data, favorites, watchlists, and reviews
 
-## Getting Started
+## Requirements
 
-To get a local copy up and running, follow these simple steps.
+A modern browser and a local static web server are required. Running the files through a local server is recommended because browser security policies can restrict API requests and module behavior when files are opened directly from the filesystem.
 
-### Prerequisites
+## Configuration
 
-- A web browser (e.g., Chrome, Firefox)
-- A local web server (e.g., `serve` from npm, Apache, Nginx) to serve the static files.
+PrimeVision does not store API keys or OAuth client identifiers in version control. The application loads an ignored file at `js/config.local.js` before the application modules.
 
-### Installation
+Create the local configuration from the example file:
 
-1. **Clone the repository (if applicable):**
-   ```bash
-   git clone <repository_url>
-   cd primevision
-   ```
-   *(Note: If you received this project as a direct download, you can skip this step.)*
-
-2. **Install a local web server (if you don't have one):**
-   If you have Node.js installed, you can use `serve`:
-   ```bash
-   npm install -g serve
-   ```
-
-3. **Obtain a TMDB API Key:**
-   - Go to [The Movie Database (TMDB) website](https://www.themoviedb.org/)
-   - Sign up for an account.
-   - Navigate to your account settings and generate a new API key (v3).
-   - Open `js/app.js` and replace `'YOUR_TMDB_API_KEY'` with your actual API key:
-     ```javascript
-     this.API_KEY = 'YOUR_TMDB_API_KEY'; // Replace with your actual TMDB API key
-     ```
-
-4. **(Optional) Configure Google OAuth:**
-   - Go to the [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select an existing one.
-   - Enable the Google People API.
-   - Go to "Credentials" and create OAuth 2.0 Client IDs (Web application type).
-   - Add `http://localhost:3000` (or your server's address) to "Authorized JavaScript origins" and "Authorized redirect URIs".
-   - Open `js/auth.js` and replace `'YOUR_GOOGLE_CLIENT_ID'` with your actual Google Client ID:
-     ```javascript
-     this.googleClientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your actual Google Client ID
-     ```
-
-### Running the Application
-
-1. **Navigate to the project directory:**
-   ```bash
-   cd c:\Users\New Tech\Desktop\primevision
-   ```
-
-2. **Start the web server:**
-   If you are using `serve`:
-   ```bash
-   serve -s
-   ```
-   This will typically start the server on `http://localhost:3000`.
-
-3. **Open in browser:**
-   Open your web browser and go to the address provided by your web server (e.g., `http://localhost:3000`).
-
-## Project Structure
-
+```bash
+cp js/config.example.js js/config.local.js
 ```
-primevision/
+
+Then add the values locally:
+
+```javascript
+window.PRIMEVISION_CONFIG = {
+    tmdbApiKey: "your_tmdb_api_key",
+    googleClientId: "your_google_oauth_client_id"
+};
+```
+
+The Google value is optional. If it is empty, the Google sign-in integration remains disabled and the local demonstration authentication continues to work.
+
+The TMDB key previously present in the repository was removed from the tracked source. If that key is still active, it must be revoked and replaced in the TMDB account before using this project again.
+
+## Running locally
+
+From the project directory, start any static web server. For example, with Node.js and the `serve` package:
+
+```bash
+npx serve .
+```
+
+Open the URL printed by the server and start from `index.html`.
+
+## Project structure
+
+```text
+PrimeVision/
 ├── css/
-│   └── style.css         # Custom CSS styles
-├── details.html          # Details page for movies/TV shows
-├── favorites-new.html    # Alternative favorites page
-├── favorites.html        # User's favorite content page
-├── images/               # Image assets
-├── index.html            # Main application entry point
+│   └── style.css
+├── images/
+│   ├── design01.png
+│   ├── design02.png
+│   ├── design03.png
+│   ├── default-avatar.svg
+│   ├── placeholder.svg
+│   ├── placeholder-backdrop.svg
+│   └── placeholder-person.svg
 ├── js/
-│   ├── app.js            # Core application logic, TMDB API integration
-│   ├── auth.js           # User authentication (local & Google OAuth)
-│   ├── favorites.js      # Favorites and watchlist management
-│   ├── language.js       # Language switching functionality
-│   └── search.js         # Search related logic
-├── login.html            # Login/Signup page
-├── profile.html          # User profile page
-└── search.html           # Search results page
+│   ├── app.js
+│   ├── auth.js
+│   ├── config.example.js
+│   ├── favorites.js
+│   ├── language.js
+│   └── search.js
+├── details.html
+├── favorites.html
+├── index.html
+├── login.html
+├── profile.html
+├── search.html
+└── README.md
 ```
 
-## Contributing
+`js/config.local.js` is intentionally excluded from the repository because it can contain local credentials.
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+## Data and privacy notes
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Favorites, watchlists, reviews, and demo profile data are stored in the browser through `localStorage`. This implementation is suitable for a client-side demonstration and should not be presented as a secure account system. Do not use real passwords or sensitive personal information in a local demonstration account.
+
+Movie metadata, images, and videos are supplied by TMDB and may be subject to TMDB terms and attribution requirements. Review the current TMDB documentation before deploying the application publicly.
+
+## Maintenance conventions
+
+Keep API credentials in `js/config.local.js` only. Do not add real keys to HTML, JavaScript, screenshots, README files, or commit messages. Keep one canonical page for each user flow and remove temporary duplicates before merging changes. Prefer small, named JavaScript methods over inline logic when adding new features.
+
+## Current limitations
+
+PrimeVision is currently a static frontend demonstration. It does not include a server-side API proxy, a database, secure OAuth session handling, automated tests, or a production deployment configuration. Google authentication is optional and should be configured only with an authorized client ID and valid origin settings.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+No license file is currently included. Usage and redistribution rights should be clarified by the repository owner before publishing the project as open source.
 
-## Contact
+## Project links
 
-Your Name/Project Maintainer - [abdelkaderbenouali301@gmail.com]
-
-Project Link: [https://github.com/your_username/PrimeVision](https://github.com/your_username/PrimeVision)
+- Repository: [github.com/benoualiabdelkader/PrimeVision](https://github.com/benoualiabdelkader/PrimeVision)
+- TMDB: [themoviedb.org](https://www.themoviedb.org/)
+- TMDB API documentation: [developer.themoviedb.org](https://developer.themoviedb.org/docs)

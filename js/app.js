@@ -3,7 +3,7 @@
 
 class PrimeVisionApp {
     constructor() {
-        this.API_KEY = '93f545a97aec858af4381e4008d9ce3c';
+        this.API_KEY = window.PRIMEVISION_CONFIG?.tmdbApiKey || '';
         this.BASE_URL = 'https://api.themoviedb.org/3';
         this.IMG_URL = 'https://image.tmdb.org/t/p/w500';
         this.BACKDROP_URL = 'https://image.tmdb.org/t/p/w1280';
@@ -85,7 +85,7 @@ class PrimeVisionApp {
             <div class="movie-card content-card cursor-pointer group" data-id="${item.id}" data-type="${item.media_type || (item.title ? 'movie' : 'tv')}">
                 <div class="poster-container relative">
                     <img loading="lazy" 
-                         src="${item.poster_path ? this.IMG_URL + item.poster_path : './images/placeholder.jpg'}" 
+                         src="${item.poster_path ? this.IMG_URL + item.poster_path : './images/placeholder.svg'}"
                          alt="${item.title || item.name}" 
                          class="w-full h-full object-cover">
                     <div class="overlay absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 text-center">
@@ -113,7 +113,7 @@ class PrimeVisionApp {
                  data-type="${item.media_type || (item.title ? 'movie' : 'tv')}"
                  onclick="app.showDetails(${item.id}, '${item.media_type || (item.title ? 'movie' : 'tv')}')">
                 <img loading="lazy" 
-                     src="${item.poster_path ? this.IMG_URL + item.poster_path : './images/placeholder.jpg'}" 
+                     src="${item.poster_path ? this.IMG_URL + item.poster_path : './images/placeholder.svg'}"
                      alt="${item.title || item.name}" 
                      class="w-16 h-24 object-cover rounded-md">
                 <div class="flex-1">
@@ -212,7 +212,7 @@ class PrimeVisionApp {
     renderDetailsContent(details, credits, videos, recommendations, trailer, isFavorite, onWatchlist, type) {
         return `
             <div class="relative">
-                <img src="${details.backdrop_path ? this.BACKDROP_URL + details.backdrop_path : './images/placeholder-backdrop.jpg'}" 
+                <img src="${details.backdrop_path ? this.BACKDROP_URL + details.backdrop_path : './images/placeholder-backdrop.svg'}"
                      alt="${details.title || details.name}" 
                      class="w-full h-48 md:h-96 object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
@@ -250,7 +250,7 @@ class PrimeVisionApp {
                 <div class="flex overflow-x-auto gap-4 pb-4">
                     ${credits.cast.slice(0, 10).map(actor => `
                         <div class="text-center flex-shrink-0 w-28">
-                            <img src="${actor.profile_path ? this.IMG_URL + actor.profile_path : './images/placeholder-person.jpg'}" 
+                            <img src="${actor.profile_path ? this.IMG_URL + actor.profile_path : './images/placeholder-person.svg'}"
                                  alt="${actor.name}" 
                                  class="w-24 h-24 rounded-full object-cover mx-auto mb-2">
                             <p class="font-semibold text-sm">${actor.name}</p>

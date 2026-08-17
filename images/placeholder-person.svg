@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-labelledby="title desc">
+  <title id="title">PrimeVision person placeholder</title>
+  <desc id="desc">Neutral placeholder for unavailable cast artwork.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f2937"/>
+      <stop offset="1" stop-color="#831843"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" fill="url(#background)"/>
+  <circle cx="300" cy="330" r="110" fill="none" stroke="#d4af37" stroke-width="16"/>
+  <path d="M140 700c25-150 125-220 160-220s135 70 160 220" fill="none" stroke="#f8fafc" stroke-width="18" stroke-linecap="round" opacity=".82"/>
+  <text x="300" y="820" fill="#d4af37" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" letter-spacing="5">CAST</text>
+</svg>

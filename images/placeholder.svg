@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-labelledby="title desc">
+  <title id="title">PrimeVision poster placeholder</title>
+  <desc id="desc">Neutral placeholder for unavailable movie artwork.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#4c0519"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" fill="url(#background)"/>
+  <path d="M150 270h300v360H150z" fill="none" stroke="#d4af37" stroke-width="14" opacity=".85"/>
+  <path d="M210 330h180M210 450h180M210 570h120" stroke="#f8fafc" stroke-width="18" stroke-linecap="round" opacity=".8"/>
+  <text x="300" y="760" fill="#d4af37" font-family="Arial, sans-serif" font-size="34" text-anchor="middle" letter-spacing="6">PRIMEVISION</text>
+</svg>

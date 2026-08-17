@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">PrimeVision default avatar</title>
+  <desc id="desc">Default avatar for a local demonstration profile.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4c0519"/>
+      <stop offset="1" stop-color="#d4af37"/>
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="128" r="128" fill="url(#background)"/>
+  <circle cx="128" cy="96" r="42" fill="#f8fafc" opacity=".9"/>
+  <path d="M54 220c12-54 42-78 74-78s62 24 74 78" fill="#f8fafc" opacity=".9"/>
+</svg>

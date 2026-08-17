@@ -3,7 +3,7 @@
 
 class SearchManager {
     constructor() {
-        this.API_KEY = '93f545a97aec858af4381e4008d9ce3c';
+        this.API_KEY = window.PRIMEVISION_CONFIG?.tmdbApiKey || '';
         this.BASE_URL = 'https://api.themoviedb.org/3';
         this.IMG_URL = 'https://image.tmdb.org/t/p/w500';
         
@@ -335,7 +335,7 @@ class SearchManager {
     renderGridItem(item) {
         const posterUrl = item.poster_path ? 
             `${this.IMG_URL}${item.poster_path}` : 
-            './images/placeholder.jpg';
+            './images/placeholder.svg';
         
         return `
             <div class="content-card group cursor-pointer" onclick="app.showDetails(${item.id}, '${item.media_type}')">
@@ -360,7 +360,7 @@ class SearchManager {
     renderListItem(item) {
         const posterUrl = item.poster_path ? 
             `${this.IMG_URL}${item.poster_path}` : 
-            './images/placeholder.jpg';
+            './images/placeholder.svg';
         
         return `
             <div class="search-result-item flex items-center gap-4 p-4 cursor-pointer" 
@@ -450,7 +450,7 @@ class SearchManager {
                 html += `
                     <div class="autocomplete-item flex items-center gap-3 p-3 hover:bg-slate-700 cursor-pointer" 
                          onclick="searchManager.selectSuggestion('${item.title || item.name}')">
-                        <img src="${item.poster_path ? this.IMG_URL + item.poster_path : './images/placeholder.jpg'}" 
+                        <img src="${item.poster_path ? this.IMG_URL + item.poster_path : './images/placeholder.svg'}"
                              alt="${item.title || item.name}" 
                              class="w-8 h-12 object-cover rounded">
                         <div class="flex-1">
